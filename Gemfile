@@ -7,6 +7,7 @@ gem "sinatra-activerecord"
 gem "rake"
 
 gem 'linkedin'
+gem 'oauth2'
 
 group :debug do
 	gem "better_errors"
