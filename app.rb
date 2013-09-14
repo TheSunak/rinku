@@ -33,7 +33,7 @@ module Rinku
 
     post '/' do
       @company_name = params[:company_name]
-      @company_id   = Linkedin.get_company_id(@company_name.gsub(" ","%20"))
+      @company_id   = Linkedin.get_company_id(@company_name.downcase.gsub(" ","%20"))
 
       erb :index
     end
