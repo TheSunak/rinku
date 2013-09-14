@@ -32,6 +32,9 @@ module Rinku
     end
 
     post '/' do
+      @company_name = params[:company_name]
+      @company_id   = Linkedin.get_company_id(@company_name)
+
       erb :index
     end
 
