@@ -17,4 +17,5 @@ end
 group :development do
   gem "shotgun"
   gem "tux"
+  gem 'webrick', '~> 1.3.1' 
 end

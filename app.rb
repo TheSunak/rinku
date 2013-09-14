@@ -31,6 +31,10 @@ module Rinku
       erb :index
     end
 
+    post '/' do
+      erb :index
+    end
+
     # Helpers
     # => define helper methods for application.
 
