@@ -5,10 +5,7 @@ Bundler.require
 # Include all models in lib/*/ folders.
 require_relative 'environment'
 
-# Rename 'AppName' to name of choice.
-# => Don't forget to update config.ru as well.
-
-module AppName
+module Rinku
   class App < Sinatra::Application
 
     # Configure Options
@@ -44,8 +41,4 @@ module AppName
     end
 
   end
-end
-
-use OmniAuth::Builder do
-  provider :linkedin, ENV['linkedin_api_key'], ENV['linkedin_secret_key'], :scope => 'r_fullprofile+r_emailaddress+r_network', :fields => ["id", "email-address", "first-name", "last-name", "headline", "industry", "picture-url", "public-profile-url", "location", "connections"]
 end
