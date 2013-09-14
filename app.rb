@@ -45,3 +45,7 @@ module AppName
 
   end
 end
+
+use OmniAuth::Builder do
+  provider :linkedin, ENV['linkedin_api_key'], ENV['linkedin_secret_key'], :scope => 'r_fullprofile+r_emailaddress+r_network', :fields => ["id", "email-address", "first-name", "last-name", "headline", "industry", "picture-url", "public-profile-url", "location", "connections"]
+end

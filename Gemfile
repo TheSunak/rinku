@@ -6,6 +6,8 @@ gem "activerecord"
 gem "sinatra-activerecord"
 gem "rake"
 
+gem 'linkedin'
+
 group :debug do
 	gem "better_errors"
 	gem "debugger"
