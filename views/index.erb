@@ -30,5 +30,12 @@
 <br>
 
 <% if @company_id %>
-  <h4>Company ID for <%= @company_name %> is: <%= @company_id %></h4> 
+  <h4>Company ID for <%= @company_name %> is: <%= @company_id %></h4>
+  
+  <p>Company Info Hash = </p>
+  
+  <br>
+
+  <%= @company_info.inspect %>
+
 <% end %>
