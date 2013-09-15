@@ -3,7 +3,7 @@ class Linkedin
 	@@consumer 		 = OAuth::Consumer.new(ENV['linkedin_api_key'], ENV['linkedin_secret_key'])
 	@@access_token = OAuth::AccessToken.new(@@consumer, ENV['linkedin_oauth_token'], ENV['linkedin_oauth_secret'])
 
-	@@fields 			 = ["email-domains","company-type","website-url","industries","status","employee-count-range","locations:(contact-info:(phone1))"]
+	@@fields 			 = ["name","email-domains","company-type","website-url","industries","status","employee-count-range","locations:(contact-info:(phone1))"]
 
 	# Getter methods for class variables.
 
@@ -26,13 +26,21 @@ class Linkedin
 	end
 
 	def self.parse_info(hash)
-		# company-type    = hash["company"]["company_type"]["name"]
-		# website-url     = hash["company"]["website_url"]
-		# industries      = hash["company"]["industries"]["industry"]["name"] * --> Multiple industries?
-		# status          = hash["company"]["status"]["name"]
-		# employee_count  = hash["company"]["employee_count_range"]["name"]
-		# phone_number    = hash["company"]["locations"]["location"][0]["contact_info"]["phone1"]
-		# @count,@industry,@phone,@status,@type,@url = Linkedin.parse_info(company_info)
+
+		count 		= hash["company"]["employee_count_range"]["name"]
+		email 		= hash["company"]["email_domains"]["email_domain"]
+		industry 	= hash["company"]["industries"]["industry"]["name"]
+		name 			= hash["company"]["name"]
+		phone 		= if (hash["company"]["locations"]["location"].is_a?(Array))
+									hash["company"]["locations"]["location"][0]["contact_info"]["phone1"] 
+								else
+									hash["company"]["locations"]["location"]["contact_info"]["phone1"] 
+								end
+		status 		= hash["company"]["status"]["name"]
+		type 			= hash["company"]["company_type"]["name"]
+		url 			= hash["company"]["website_url"]
+
+		return count,email,industry,name,phone,status,type,url
 	end
 
 	# Search API for LinkedIn.

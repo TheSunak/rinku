@@ -32,11 +32,20 @@ module Rinku
     end
 
     post '/' do
-      company_name = params[:company_name]
-      company_id   = Linkedin.get_company_id(company_name.downcase.gsub(" ","%20"))
+      @company_name = params[:company_name]
+      company_id   = Linkedin.get_company_id(@company_name.downcase.gsub(" ","%20"))
       company_info = Linkedin.get_company_info(company_id)
 
-      @count,@industry,@phone,@status,@type,@url = Linkedin.parse_info(company_info)
+      @count,@email,@industry,@name,@phone,@status,@type,@url = Linkedin.parse_info(company_info)
+
+      puts "count = #{@count}"
+      puts "email = #{@email}"
+      puts "industry = #{@industry}"
+      puts "name = #{@name}"
+      puts "phone = #{@phone}"
+      puts "status = #{@status}"
+      puts "type = #{@type}"
+      puts "url = #{@url}"
 
       erb :index
     end
