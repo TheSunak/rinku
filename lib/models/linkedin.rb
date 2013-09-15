@@ -25,6 +25,16 @@ class Linkedin
 		"(" + fields.join(",") + ")"
 	end
 
+	def self.parse_info(hash)
+		# company-type    = hash["company"]["company_type"]["name"]
+		# website-url     = hash["company"]["website_url"]
+		# industries      = hash["company"]["industries"]["industry"]["name"] * --> Multiple industries?
+		# status          = hash["company"]["status"]["name"]
+		# employee_count  = hash["company"]["employee_count_range"]["name"]
+		# phone_number    = hash["company"]["locations"]["location"][0]["contact_info"]["phone1"]
+		# @count,@industry,@phone,@status,@type,@url = Linkedin.parse_info(company_info)
+	end
+
 	# Search API for LinkedIn.
 
 	def self.get_company_id(company_name)

@@ -2,20 +2,16 @@
 
 <br><br>
 <img src="http://images2.wikia.nocookie.net/__cb20120124215036/zelda/es/images/5/54/Link_Artwork_1_(Ocarina_of_Time).png" width="30%" height="30%">
- <br><br>
+
+<br>
+<br>
 
 <div class="row demo-row">
 
-
   <form action="/" method="POST">
 
-
-
-    <div class="span3">
-      
+    <div class="span3">      
       <input type="text" name="company_name" value="<%= @company_name %>" placeholder="Enter Company Name" class="span3" />
-
-
     </div>
 
     <div class="span3">
@@ -27,15 +23,7 @@
 </div>
 
 <br>
-<br>
 
-<% if @company_id %>
-  <h4>Company ID for <%= @company_name %> is: <%= @company_id %></h4>
-  
-  <p>Company Info Hash = </p>
-  
-  <br>
-
-  <%= @company_info.inspect %>
-
+<% if @industry %>
+	Print out information here.
 <% end %>
