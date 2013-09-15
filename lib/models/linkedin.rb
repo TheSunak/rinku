@@ -26,7 +26,6 @@ class Linkedin
 	end
 
 	def self.parse_info(hash)
-
 		count 		= hash["company"]["employee_count_range"]["name"]
 		email 		= if (hash["company"]["email_domains"]["email_domain"].is_a?(Array))
 									hash["company"]["email_domains"]["email_domain"].join(", ")
@@ -61,13 +60,3 @@ class Linkedin
 	end
 
 end
-
-<<-instructions
-
-In order to make an API call:
-
-	l = Linkedin.new
-	body = l.access_token.get("http://api.linkedin.com/v1/company-search?keywords=salesforce.com&sort=relevance").body
-	hash = Hash.from_xml(body)
-
-instructions
