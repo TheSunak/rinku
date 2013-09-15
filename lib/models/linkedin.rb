@@ -28,7 +28,11 @@ class Linkedin
 	def self.parse_info(hash)
 
 		count 		= hash["company"]["employee_count_range"]["name"]
-		email 		= hash["company"]["email_domains"]["email_domain"]
+		email 		= if (hash["company"]["email_domains"]["email_domain"].is_a?(Array))
+									hash["company"]["email_domains"]["email_domain"].join(", ")
+								else
+									hash["company"]["email_domains"]["email_domain"]
+								end
 		industry 	= hash["company"]["industries"]["industry"]["name"]
 		name 			= hash["company"]["name"]
 		phone 		= if (hash["company"]["locations"]["location"].is_a?(Array))

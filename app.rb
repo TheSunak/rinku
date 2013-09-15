@@ -38,15 +38,6 @@ module Rinku
 
       @count,@email,@industry,@name,@phone,@status,@type,@url = Linkedin.parse_info(company_info)
 
-      puts "count = #{@count}"
-      puts "email = #{@email}"
-      puts "industry = #{@industry}"
-      puts "name = #{@name}"
-      puts "phone = #{@phone}"
-      puts "status = #{@status}"
-      puts "type = #{@type}"
-      puts "url = #{@url}"
-
       erb :index
     end
 
