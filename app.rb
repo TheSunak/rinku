@@ -34,6 +34,18 @@ module Rinku
     post '/' do
       @company_name = params[:company_name]
       company_id   = Linkedin.get_company_id(@company_name.downcase.gsub(" ","%20"))
+
+      #Based on the keyword, this returns all the results possible:
+      search_results_ids = Linkedin.get_company_id_all(@company_name.downcase.gsub(" ","%20"))
+
+      puts "------ Output-----"
+      puts search_results_ids
+
+      company_info_for_ids = Linkedin.get_info_from_ids(search_results_ids)
+
+      p "return from function:"
+      puts company_info_for_ids
+  
       company_info = Linkedin.get_company_info(company_id)
 
       @count,@email,@industry,@name,@phone,@status,@type,@url = Linkedin.parse_info(company_info)
