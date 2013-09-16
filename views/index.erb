@@ -24,7 +24,35 @@
 
 <br>
 
-<% if @industry %>
+<% if @name_search %>
+
+  <h2>Search Results for <%= @name %></h2>
+
+
+      <% @results.each do |result| %>
+        <table class="table table-hover">
+          <tbody>
+
+            <tr>
+              <td>Name:</td>
+              <td><%= result[0] %></td>
+            </tr>
+
+            <tr>
+              <td>Website URL:</td>
+              <td><%= result.url%></td>
+            </tr>
+
+          </tbody>
+        </table>
+
+      <% end %>
+    <% end %>
+
+
+<br><br><br>
+
+ <% if @industry %>
 
 	<h2>Information for <%= @name %></h2>
 

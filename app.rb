@@ -39,16 +39,45 @@ module Rinku
       search_results_ids = Linkedin.get_company_id_all(@company_name.downcase.gsub(" ","%20"))
 
       puts "------ Output-----"
-      puts search_results_ids
 
-      company_info_for_ids = Linkedin.get_info_from_ids(search_results_ids)
+      puts "Search Results Query:"
+      
+      @results = {}
+      @i = 0
 
-      p "return from function:"
-      puts company_info_for_ids
+      search_results_ids.each do |id|
+          
+          company_info = Linkedin.get_company_info(id)
+
+          @name_search,@url_search = Linkedin.parse_info_search(company_info)
+          
+          #puts @name_search
+          #puts @url_search
+          
+          @results[@name_search] = {
+            :url => @url_search
+
+          }
+
+          @i = @i +1
+      end
+
+      pp @results
   
-      company_info = Linkedin.get_company_info(company_id)
+  @results.each do |result|
+    puts result[0]
+    puts result["url"]
 
-      @count,@email,@industry,@name,@phone,@status,@type,@url = Linkedin.parse_info(company_info)
+  end
+
+
+
+
+      #company_info = Linkedin.get_company_info(company_id)
+
+      #@count,@email,@industry,@name,@phone,@status,@type,@url = Linkedin.parse_info(company_info)
+
+
 
       erb :index
     end

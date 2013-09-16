@@ -3,7 +3,8 @@ class Linkedin
 	@@consumer 		 = OAuth::Consumer.new(ENV['linkedin_api_key'], ENV['linkedin_secret_key'])
 	@@access_token = OAuth::AccessToken.new(@@consumer, ENV['linkedin_oauth_token'], ENV['linkedin_oauth_secret'])
 
-	@@fields 			 = ["name","email-domains","company-type","website-url","industries","status","employee-count-range","locations:(contact-info:(phone1))"]
+	@@fields 			 = ["name","email-domains", "company-type","website-url","industries","status","employee-count-range","locations:(contact-info:(phone1))"]
+
 
 	# Getter methods for class variables.
 
@@ -61,11 +62,12 @@ class Linkedin
 		array = info.collect{ |hash| hash["id"]}
 	end
 
+	def self.parse_info_search(hash)
+	
+		name_search 			= hash["company"]["name"]
+		url_search 				= hash["company"]["website_url"]
 
-
-
-	def self.get_info_from_ids(search_results_ids)
-		x = 1
+		return name_search,url_search
 	end
 
 
