@@ -1,5 +1,8 @@
 <title>Rinku - A Tool for LinkedIn</title>
 
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+
 <br><br>
 <img src="http://images2.wikia.nocookie.net/__cb20120124215036/zelda/es/images/5/54/Link_Artwork_1_(Ocarina_of_Time).png" width="20%" height="20%" align="middle" padding-left:20px>
 
@@ -27,7 +30,7 @@
 <% if @name_search %>
 
   <h2>Search Results for <%= @company_name %></h2>
-<table class="table table-hover" >
+<table id = "searchresults" class="table table-hover" >
   <tbody>
     <tr>
               <b><td>Name:</td></b>
@@ -47,6 +50,14 @@
                 </tbody>
         </table>
     <% end %>
+
+<script>
+$('#searchresults').find('tr').click( function(){
+  
+  alert('You clicked row '+ ($(this).index()) );
+
+});
+</script>
 
 
 <br><br><br>

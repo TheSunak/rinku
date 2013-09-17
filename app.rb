@@ -50,8 +50,6 @@ module Rinku
 
           @name_search,@url_search = Linkedin.parse_info_search(company_info)
           
-          #puts @name_search
-          #puts @url_search
           
           @results[@name_search] = @url_search
 
