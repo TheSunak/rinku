@@ -24,10 +24,6 @@ module Rinku
     # Filters
     # => add route filters if necessary.
 
-    before do
-      @results = []
-    end
-
     # Routes
     # => define controller actions for application.
 
@@ -36,25 +32,19 @@ module Rinku
     end
 
     post '/' do
-      @company_name = params[:company_name]
-
-      company_id = Linkedin.get_company_id(@company_name.downcase.gsub(" ","%20"))
-      search_ids = Linkedin.get_search_ids(@company_name.downcase.gsub(" ","%20"))
+      @company_name   = params[:company_name]
       
-      search_ids.each do |id|
-          company_info = Linkedin.get_company_info(id)
-          name_search, url_search, id_search = Linkedin.parse_info_search(company_info)
-          @results << {"company" => name_search, "url" => url_search, "id" => id_search}
-      end
+      search_ids      = Linkedin.get_search_ids(@company_name.downcase.gsub(" ","%20"))
+      @search_results = Linkedin.get_search_results(search_ids)
 
-      puts @results
+      puts @search_results
 
       erb :index
     end
 
     post '/determinerow' do
-      id_clicked = params[:id]
-      company_info = Linkedin.get_company_info(id_clicked)
+      id_clicked   = params[:id]
+      company_info = Linkedin.get_company_result(id_clicked)
       
       @count,@email,@industry,@name,@phone,@status,@type,@url = Linkedin.parse_info(company_info)
       

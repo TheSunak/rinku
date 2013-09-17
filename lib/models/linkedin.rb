@@ -64,17 +64,25 @@ class Linkedin
 		array = info.collect{ |hash| hash["id"]}
 	end
 
-	def self.parse_info_search(hash)
+	def self.get_company_results(company_id)
+		body = access_token.get("http://api.linkedin.com/v1/companies/#{company_id}:#{field_string}").body
+		hash = Hash.from_xml(body)
+	end
+
+	def self.get_search_results(search_ids)
+		search_ids.collect do |id|
+      company_info = get_company_results(id)
+      name_search, url_search, id_search = parse_search_info(company_info)
+      {"company" => name_search, "url" => url_search, "id" => id_search}
+  	end
+	end
+
+	def self.parse_search_info(hash)
 		name_search	= hash["company"]["name"]
 		url_search	= hash["company"]["website_url"]
 		id_search		= hash["company"]["id"]
 
-		return name_search,url_search, id_search
-	end
-
-	def self.get_company_info(company_id)
-		body = access_token.get("http://api.linkedin.com/v1/companies/#{company_id}:#{field_string}").body
-		hash = Hash.from_xml(body)
+		return name_search,url_search,id_search
 	end
 
 end
