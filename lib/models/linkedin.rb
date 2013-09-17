@@ -3,7 +3,7 @@ class Linkedin
 	@@consumer 		 = OAuth::Consumer.new(ENV['linkedin_api_key'], ENV['linkedin_secret_key'])
 	@@access_token = OAuth::AccessToken.new(@@consumer, ENV['linkedin_oauth_token'], ENV['linkedin_oauth_secret'])
 
-	@@fields 			 = ["name","email-domains", "company-type","website-url","industries","status","employee-count-range","locations:(contact-info:(phone1))"]
+	@@fields 			 = ["id", "name","email-domains", "company-type","website-url","industries","status","employee-count-range","locations:(contact-info:(phone1))"]
 
 
 	# Getter methods for class variables.
@@ -68,8 +68,23 @@ class Linkedin
 	
 		name_search 			= hash["company"]["name"]
 		url_search 				= hash["company"]["website_url"]
+		id_search               = hash["company"]["id"]
 
-		return name_search,url_search
+		return name_search,url_search, id_search
+	end
+
+	def self.get_id_for_search_company(row_clicked, search_results)
+		#We do not want to use the header row:
+		puts search_results
+
+		#puts search_results[row_clicked]
+		#puts search_results[row_clicked]	
+		#Find
+			
+
+		#end
+
+		
 	end
 
 

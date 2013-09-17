@@ -35,17 +35,22 @@
     <tr>
               <b><td>Name:</td></b>
               <b><td>Website URL:</td></b>
+              <b><td>Id</td></b>
             </tr>
-      <% @results.each do |name,url| %>
-        
-          
 
-              <tr>
-              <td><%= name %></td>              
-              <td><%= url%></td>
-               </tr>
-     
-      <% end %>
+
+  <% @results.each do |key, value| %>
+
+  <tr>
+        <% value.each do |k, v| %>
+          
+          <td><%= v%></td>              
+              <% end %>
+
+    </tr>   
+            <% end %>
+
+
 
                 </tbody>
         </table>
@@ -54,13 +59,14 @@
   <script type="text/javascript"> 
   $(document).ready(function() {
     $('#searchresults').find('tr').click( function(){
-      var value = $(this).index()
+      var row = $(this).index()
+      var name = $(this).find('td:first').text()
 
       $.ajax({
         url: '/determinerow',
         dataType: 'json',
         type: 'POST',
-        data : { row: value}, // or $(event.target).serialize()
+        data : { row: row, name: name}, // or $(event.target).serialize()
         accepts: "application/json",
         success: function(json) {
           //alert(json);

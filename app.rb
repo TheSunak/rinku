@@ -16,6 +16,12 @@ module Rinku
       set :public_folder, 'public'
     end
 
+    before do
+      @results = {}
+
+    end
+
+
     # Database
     # => delete if not needed.
 
@@ -37,6 +43,7 @@ module Rinku
       puts "Row clicked:"
       puts @row_clicked
 
+      #id_for_clicked = Linkedin.get_id_for_search_company(@row_clicked, @results)
       
     end
 
@@ -46,24 +53,44 @@ module Rinku
       company_id   = Linkedin.get_company_id(@company_name.downcase.gsub(" ","%20"))
 
       #Based on the keyword, this returns all the results possible:
-      search_results_ids = Linkedin.get_company_id_all(@company_name.downcase.gsub(" ","%20"))
+      @search_results_ids = Linkedin.get_company_id_all(@company_name.downcase.gsub(" ","%20"))
 
+      pp @search_results_ids
       #puts "------ Output-----"
 
+      i = 0
       #puts "Search Results Query:"
       
-      @results = {}
-
-      search_results_ids.each do |id|
+      @search_results_ids.each do |id|
           
           company_info = Linkedin.get_company_info(id)
 
-          @name_search,@url_search = Linkedin.parse_info_search(company_info)
+          @name_search,@url_search, @id_search = Linkedin.parse_info_search(company_info)
           
-          
-          @results[@name_search] = @url_search
+          @results[i] = {"company" => @name_search, "url" => @url_search, "id" => @id_search}
 
+          i = i + 1
       end
+
+      #pp @results
+
+      #puts "TESTING------------>"
+
+      #@results.each do |key, value|
+       # puts "key:"
+       # puts key
+       # puts "value:"
+       # puts value
+
+       # value.each do |k, v|
+       #   puts "inner key:"
+       #   puts k
+       #   puts "inner value:"
+       #   puts v
+       # end
+       
+      #end
+
   
 
       #company_info = Linkedin.get_company_info(company_id)
