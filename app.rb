@@ -31,6 +31,16 @@ module Rinku
       erb :index
     end
 
+    post '/determinerow' do
+      @row_clicked = params[:row]
+
+      puts "Row clicked:"
+      puts @row_clicked
+
+      
+    end
+
+
     post '/' do
       @company_name = params[:company_name]
       company_id   = Linkedin.get_company_id(@company_name.downcase.gsub(" ","%20"))
