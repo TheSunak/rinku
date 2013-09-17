@@ -16,10 +16,6 @@ module Rinku
       set :public_folder, 'public'
     end
 
-    before do
-      @results = {}
-    end
-
     # Database
     # => delete if not needed.
 
@@ -28,10 +24,31 @@ module Rinku
     # Filters
     # => add route filters if necessary.
 
+    before do
+      @results = []
+    end
+
     # Routes
     # => define controller actions for application.
 
     get '/' do
+      erb :index
+    end
+
+    post '/' do
+      @company_name = params[:company_name]
+
+      company_id = Linkedin.get_company_id(@company_name.downcase.gsub(" ","%20"))
+      search_ids = Linkedin.get_search_ids(@company_name.downcase.gsub(" ","%20"))
+      
+      search_ids.each do |id|
+          company_info = Linkedin.get_company_info(id)
+          name_search, url_search, id_search = Linkedin.parse_info_search(company_info)
+          @results << {"company" => name_search, "url" => url_search, "id" => id_search}
+      end
+
+      puts @results
+
       erb :index
     end
 
@@ -42,36 +59,7 @@ module Rinku
       @count,@email,@industry,@name,@phone,@status,@type,@url = Linkedin.parse_info(company_info)
       
       puts @count,@email,@industry,@name,@phone,@status,@type,@url
-
       # return @count,@email,@industry,@name,@phone,@status,@type,@url
-    end
-
-
-    post '/' do
-      @company_name = params[:company_name]
-      company_id   = Linkedin.get_company_id(@company_name.downcase.gsub(" ","%20"))
-
-      #Based on the keyword, this returns all the results possible:
-      @search_results_ids = Linkedin.get_company_id_all(@company_name.downcase.gsub(" ","%20"))
-
-      #pp @search_results_ids
-      #puts "------ Output-----"
-
-      i = 0
-      #puts "Search Results Query:"
-      
-      @search_results_ids.each do |id|
-          
-          company_info = Linkedin.get_company_info(id)
-
-          @name_search,@url_search, @id_search = Linkedin.parse_info_search(company_info)
-          
-          @results[i] = {"company" => @name_search, "url" => @url_search, "id" => @id_search}
-
-          i = i + 1
-      end
-
-      erb :index
     end
 
     # Helpers
