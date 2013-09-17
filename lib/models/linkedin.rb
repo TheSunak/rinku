@@ -56,7 +56,7 @@ class Linkedin
 	end
 
 	def self.get_company_id_all(company_name)
-		body = access_token.get("http://api.linkedin.com/v1/company-search?keywords=#{company_name}.com&sort=relevance").body
+		body = access_token.get("http://api.linkedin.com/v1/company-search?keywords=#{company_name}.com&sort=relevance&count=10").body
 		hash = Hash.from_xml(body)
 
 		info = hash["company_search"]["companies"]["company"]
