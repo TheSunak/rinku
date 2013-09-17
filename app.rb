@@ -38,12 +38,16 @@ module Rinku
     end
 
     post '/determinerow' do
-      @row_clicked = params[:row]
+      @id_clicked = params[:id]
 
-      puts "Row clicked:"
-      puts @row_clicked
+      puts "id clicked:"
+      puts @id_clicked
 
-      #id_for_clicked = Linkedin.get_id_for_search_company(@row_clicked, @results)
+      @company_info = Linkedin.get_company_info(@id_clicked)
+
+      pp @company_info
+
+      @count,@email,@industry,@name,@phone,@status,@type,@url = Linkedin.parse_info(@company_info)
       
     end
 

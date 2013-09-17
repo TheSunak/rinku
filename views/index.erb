@@ -60,13 +60,13 @@
   $(document).ready(function() {
     $('#searchresults').find('tr').click( function(){
       var row = $(this).index()
-      var name = $(this).find('td:first').text()
+      var id = $(this).find('td:last').text()
 
       $.ajax({
         url: '/determinerow',
         dataType: 'json',
         type: 'POST',
-        data : { row: row, name: name}, // or $(event.target).serialize()
+        data : { row: row, id: id}, // or $(event.target).serialize()
         accepts: "application/json",
         success: function(json) {
           //alert(json);

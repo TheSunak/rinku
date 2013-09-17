@@ -90,6 +90,9 @@ class Linkedin
 
 
 	def self.get_company_info(company_id)
+		puts "company_id"
+		puts company_id
+
 		body = access_token.get("http://api.linkedin.com/v1/companies/#{company_id}:#{field_string}").body
 		hash = Hash.from_xml(body)
 	end
