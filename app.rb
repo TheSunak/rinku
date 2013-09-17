@@ -38,14 +38,11 @@ module Rinku
       #Based on the keyword, this returns all the results possible:
       search_results_ids = Linkedin.get_company_id_all(@company_name.downcase.gsub(" ","%20"))
 
+      #puts "------ Output-----"
 
-
-      puts "------ Output-----"
-
-      puts "Search Results Query:"
+      #puts "Search Results Query:"
       
       @results = {}
-      @i = 0
 
       search_results_ids.each do |id|
           
@@ -58,13 +55,7 @@ module Rinku
           
           @results[@name_search] = @url_search
 
-          
-
-          @i = @i +1
       end
-
-      @results.each {|key, value| puts "#{key} is #{value}" }
-  
   
 
       #company_info = Linkedin.get_company_info(company_id)

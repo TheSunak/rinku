@@ -26,31 +26,26 @@
 
 <% if @name_search %>
 
-  <h2>Search Results for <%= @name %></h2>
-
+  <h2>Search Results for <%= @company_name %></h2>
+<table class="table table-hover" >
+  <tbody>
+    <tr>
+              <b><td>Name:</td></b>
+              <b><td>Website URL:</td></b>
+            </tr>
       <% @results.each do |name,url| %>
-        <table class="table table-hover" >
-          <tbody>
+        
+          
 
-            <tr>
-              <td>Name:</td>
-              <td><%= name %></td>
-            </tr>
-
-            <tr>
-              <td>Website URL:</td>
+              <tr>
+              <td><%= name %></td>              
               <td><%= url%></td>
-            </tr>
-
-            <tr>
-                    <td><input type="checkbox" value="" class="checkbox"></td>
-
-            </tr>
-
-          </tbody>
-        </table>
-
+               </tr>
+     
       <% end %>
+
+                </tbody>
+        </table>
     <% end %>
 
 
