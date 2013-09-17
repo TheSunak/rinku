@@ -18,9 +18,7 @@ module Rinku
 
     before do
       @results = {}
-
     end
-
 
     # Database
     # => delete if not needed.
@@ -38,19 +36,14 @@ module Rinku
     end
 
     post '/determinerow' do
-      @id_clicked = params[:id]
-
-      #puts "id clicked:"
-      #puts @id_clicked
-
-      @company_info = Linkedin.get_company_info(@id_clicked)
-
-      #pp @company_info
-
-      @count,@email,@industry,@name,@phone,@status,@type,@url = Linkedin.parse_info(@company_info)
+      id_clicked = params[:id]
+      company_info = Linkedin.get_company_info(id_clicked)
+      
+      @count,@email,@industry,@name,@phone,@status,@type,@url = Linkedin.parse_info(company_info)
       
       puts @count,@email,@industry,@name,@phone,@status,@type,@url
-      return @count,@email,@industry,@name,@phone,@status,@type,@url
+
+      # return @count,@email,@industry,@name,@phone,@status,@type,@url
     end
 
 
