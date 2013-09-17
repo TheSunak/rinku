@@ -44,6 +44,7 @@ class Linkedin
 		type 			= hash["company"]["company_type"]["name"]
 		url 			= hash["company"]["website_url"]
 
+
 		return count,email,industry,name,phone,status,type,url
 	end
 
@@ -73,25 +74,7 @@ class Linkedin
 		return name_search,url_search, id_search
 	end
 
-	def self.get_id_for_search_company(row_clicked, search_results)
-		#We do not want to use the header row:
-		puts search_results
-
-		#puts search_results[row_clicked]
-		#puts search_results[row_clicked]	
-		#Find
-			
-
-		#end
-
-		
-	end
-
-
-
 	def self.get_company_info(company_id)
-		puts "company_id"
-		puts company_id
 
 		body = access_token.get("http://api.linkedin.com/v1/companies/#{company_id}:#{field_string}").body
 		hash = Hash.from_xml(body)

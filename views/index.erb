@@ -4,7 +4,6 @@
 
 
 <br><br>
-<img src="http://images2.wikia.nocookie.net/__cb20120124215036/zelda/es/images/5/54/Link_Artwork_1_(Ocarina_of_Time).png" width="20%" height="20%" align="middle" padding-left:20px>
 
 <br>
 <br>
@@ -27,65 +26,38 @@
 
 <br>
 
-<% if @name_search %>
 
   <h2>Search Results for <%= @company_name %></h2>
 <table id = "searchresults" class="table table-hover" >
   <tbody>
     <tr>
-              <b><td>Name:</td></b>
-              <b><td>Website URL:</td></b>
-              <b><td>Id</td></b>
-            </tr>
+          <b><td>Name:</td></b>
+          <b><td>Website URL:</td></b>
+          <b><td>Id</td></b>
+    </tr>
 
 
   <% @results.each do |key, value| %>
 
-  <tr>
-        <% value.each do |k, v| %>
-          
-          <td><%= v%></td>              
-              <% end %>
-
-    </tr>   
-            <% end %>
-
-
-
-                </tbody>
-        </table>
+    <tr>
+    <% value.each do |k, v| %>
+            
+    <td><%= v%></td>              
     <% end %>
 
-  <script type="text/javascript"> 
-  $(document).ready(function() {
-    $('#searchresults').find('tr').click( function(){
-      var row = $(this).index()
-      var id = $(this).find('td:last').text()
+    </tr>   
+    <% end %>
 
-      $.ajax({
-        url: '/determinerow',
-        dataType: 'json',
-        type: 'POST',
-        data : { row: row, id: id}, // or $(event.target).serialize()
-        accepts: "application/json",
-        success: function(json) {
-          //alert(json);
-        }
-      })
+  </tbody>
 
-    });
-
-  });
-</script>
+</table>
 
 
 <br><br><br>
 
- <% if @industry %>
+	<h2>Information for <%= @company_name %></h2>
 
-	<h2>Information for <%= @name %></h2>
-
-	<table class="table table-hover">
+	<table class="table">
 	  <tbody>
 
       <tr>
@@ -126,4 +98,24 @@
 	  </tbody>
 	</table>
 
-<% end %>
+<script type="text/javascript"> 
+  $(document).ready(function() {
+    $('#searchresults').find('tr').click( function(){
+      var row = $(this).index()
+      var id = $(this).find('td:last').text()
+
+      $.ajax({
+        url: '/determinerow',
+        dataType: 'json',
+        type: 'POST',
+        data : { row: row, id: id}, // or $(event.target).serialize()
+        accepts: "application/json",
+        success: function(json) {
+          //alert(json);
+        }
+      })
+
+    });
+
+  });
+</script>
