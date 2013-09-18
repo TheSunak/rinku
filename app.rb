@@ -44,12 +44,11 @@ module Rinku
 
     post '/determinerow' do
       id_clicked   = params[:id]
+      
       company_info = Linkedin.get_company_result(id_clicked)
+      row_results  = Linkedin.parse_info(company_info)
       
-      @count,@email,@industry,@name,@phone,@status,@type,@url = Linkedin.parse_info(company_info)
-      
-      puts @count,@email,@industry,@name,@phone,@status,@type,@url
-      # return @count,@email,@industry,@name,@phone,@status,@type,@url
+      row_results.to_json
     end
 
     # Helpers
