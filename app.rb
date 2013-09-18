@@ -40,13 +40,12 @@ module Rinku
       erb :index
     end
 
+    # ==> JSON post from :index form.
     post '/determinerow' do
       id_clicked   = params[:id]
       
       company_info = Linkedin.get_company_result(id_clicked)
       row_results  = Linkedin.parse_info(company_info)
-
-      puts row_results
       
       row_results.to_json
     end
