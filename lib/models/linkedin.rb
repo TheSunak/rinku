@@ -44,7 +44,6 @@ class Linkedin
 		type 			= hash["company"]["company_type"]["name"]
 		url 			= hash["company"]["website_url"]
 
-
 		return [count,email,industry,name,phone,status,type,url]
 	end
 

@@ -37,8 +37,6 @@ module Rinku
       search_ids      = Linkedin.get_search_ids(@company_name.downcase.gsub(" ","%20"))
       @search_results = Linkedin.get_search_results(search_ids)
 
-      puts @search_results
-
       erb :index
     end
 
@@ -47,6 +45,8 @@ module Rinku
       
       company_info = Linkedin.get_company_result(id_clicked)
       row_results  = Linkedin.parse_info(company_info)
+
+      puts row_results
       
       row_results.to_json
     end
