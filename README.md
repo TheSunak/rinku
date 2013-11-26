@@ -1,5 +1,5 @@
 ## Rinku Project
 
-This project will be an interface with the LinkedIn API.
+[![Code Climate](https://codeclimate.com/github/cjlwired/rinku.png)](https://codeclimate.com/github/cjlwired/rinku)
 
-Details forthcoming.
+This project will be an interface with the LinkedIn API.
