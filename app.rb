@@ -45,7 +45,7 @@ module Rinku
       id_clicked   = params[:id]
       
       company_info = Linkedin.get_company_result(id_clicked)
-      row_results  = Linkedin.parse_info(company_info)
+      row_results  = Linkedin.collect_data(company_info)
       
       row_results.to_json
     end

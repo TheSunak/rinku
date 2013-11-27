@@ -3,8 +3,15 @@ class Linkedin
 	@@consumer 		 = OAuth::Consumer.new(ENV['linkedin_api_key'], ENV['linkedin_secret_key'])
 	@@access_token = OAuth::AccessToken.new(@@consumer, ENV['linkedin_oauth_token'], ENV['linkedin_oauth_secret'])
 
-	@@fields 			 = ["company-type","email-domains","employee-count-range","id","locations:(contact-info:(phone1))","industries","name","status","website-url"]
-
+	@@fields 			 = ["company-type",
+										"email-domains",
+										"employee-count-range",
+										"id",
+										"locations:(contact-info:(phone1))",
+										"industries",
+										"name",
+										"status",
+										"website-url"]
 
 	# Getter methods for class variables.
 
@@ -26,25 +33,34 @@ class Linkedin
 		"(" + fields.join(",") + ")"
 	end
 
-	def self.parse_info(hash)
+	def self.collect_data(hash)
 		count 		= hash["company"]["employee_count_range"]["name"]
-		email 		= if (hash["company"]["email_domains"]["email_domain"].is_a?(Array))
-									hash["company"]["email_domains"]["email_domain"].join(", ")
-								else
-									hash["company"]["email_domains"]["email_domain"]
-								end
 		industry 	= hash["company"]["industries"]["industry"]["name"]
 		name 			= hash["company"]["name"]
-		phone 		= if (hash["company"]["locations"]["location"].is_a?(Array))
-									hash["company"]["locations"]["location"][0]["contact_info"]["phone1"] 
-								else
-									hash["company"]["locations"]["location"]["contact_info"]["phone1"] 
-								end
 		status 		= hash["company"]["status"]["name"]
 		type 			= hash["company"]["company_type"]["name"]
 		url 			= hash["company"]["website_url"]
 
+		email 		= parse_email(hash)
+		phone 		= parse_phone(hash)
+
 		return [count,email,industry,name,phone,status,type,url]
+	end
+
+	def self.parse_email(hash)
+		if (hash["company"]["email_domains"]["email_domain"].is_a?(Array))
+			hash["company"]["email_domains"]["email_domain"].join(", ")
+		else
+			hash["company"]["email_domains"]["email_domain"]
+		end
+	end
+
+	def self.parse_phone(hash)
+		if (hash["company"]["locations"]["location"].is_a?(Array))
+			hash["company"]["locations"]["location"][0]["contact_info"]["phone1"] 
+		else
+			hash["company"]["locations"]["location"]["contact_info"]["phone1"] 
+		end
 	end
 
 	# Search API for LinkedIn.
