@@ -62,23 +62,17 @@ class Linkedin
 
 	# Search API for LinkedIn.
 
-	def self.get_company_id(company_name)
-		body = access_token.get("http://api.linkedin.com/v1/company-search?keywords=#{company_name}.com&sort=relevance").body
-		hash = Hash.from_xml(body)
-		hash["company_search"]["companies"]["company"][0]["id"]
-	end
-
 	def self.get_search_ids(company_name)
 		body = access_token.get("http://api.linkedin.com/v1/company-search?keywords=#{company_name}.com&sort=relevance&count=10").body
 		hash = Hash.from_xml(body)
 
 		info  = hash["company_search"]["companies"]["company"]
-		array = info.collect{ |hash| hash["id"]}
+		info.collect{ |hash| hash["id"]}
 	end
 
 	def self.get_company_result(company_id)
 		body = access_token.get("http://api.linkedin.com/v1/companies/#{company_id}:#{field_string}").body
-		hash = Hash.from_xml(body)
+		Hash.from_xml(body)
 	end
 
 	def self.get_search_results(search_ids)
