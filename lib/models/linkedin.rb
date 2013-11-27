@@ -48,11 +48,8 @@ class Linkedin
 	end
 
 	def self.parse_email(hash)
-		if (hash["company"]["email_domains"]["email_domain"].is_a?(Array))
-			hash["company"]["email_domains"]["email_domain"].join(", ")
-		else
-			hash["company"]["email_domains"]["email_domain"]
-		end
+		email = hash["company"]["email_domains"]["email_domain"]
+		email.is_a?(Array) ? email.join(", ") : email
 	end
 
 	def self.parse_phone(hash)
