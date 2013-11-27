@@ -30,7 +30,7 @@
 
 <h2>Search Results for <%= @company_name %></h2>
 
-<table id = "searchresults" class="table table-hover" >
+<table id = "searchresults" class="table table-hover">
   <tbody>
     <tr>
           <b><td>Name:</td></b>
@@ -42,8 +42,8 @@
       <% @search_results.each do |result| %>
         
         <tr>
-        <% result.each do |k, v| %>       
-          <td><%= v%></td>              
+        <% result.each do |value| %>       
+          <td><%= value %></td>              
         <% end %>
         </tr>
 

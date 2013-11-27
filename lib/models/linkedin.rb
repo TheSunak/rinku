@@ -78,8 +78,7 @@ class Linkedin
 	def self.get_search_results(search_ids)
 		search_ids.collect do |id|
       company_info = get_company_result(id)
-      name_search, url_search, id_search = parse_search_info(company_info)
-      {"company" => name_search, "url" => url_search, "id" => id_search}
+      parse_search_info(company_info)
   	end
 	end
 
@@ -88,7 +87,7 @@ class Linkedin
 		url_search	= hash["company"]["website_url"]
 		id_search		= hash["company"]["id"]
 
-		return name_search,url_search,id_search
+		return [name_search,url_search,id_search]
 	end
 
 end
