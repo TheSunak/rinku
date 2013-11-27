@@ -1,13 +1,10 @@
 <title>Rinku - A Tool for LinkedIn</title>
 
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-
 <br><br>
 
 <img src="http://images2.wikia.nocookie.net/__cb20120124215036/zelda/es/images/5/54/Link_Artwork_1_(Ocarina_of_Time).png" width="20%" height="20%">
 
-<br>
-<br>
+<br><br>
 
 <div class="row demo-row">
 
@@ -25,28 +22,26 @@
 
 </div>
 
-<br>
-
+<br><br>
 
 <h2>Search Results for <%= @company_name %></h2>
 
-<table id = "searchresults" class="table table-hover">
+<table id="searchresults" class="table table-hover">
   <tbody>
     <tr>
-          <b><td>Name:</td></b>
-          <b><td>Website URL:</td></b>
-          <b><td>Id</td></b>
+          <td><b>NAME</b></td>
+          <td><b>WEBSITE URL</b></td>
+          <td><b>ID</b></td>
     </tr>
 
     <% if @search_results %>
-      <% @search_results.each do |result| %>
-        
-        <tr>
-        <% result.each do |value| %>       
-          <td><%= value %></td>              
-        <% end %>
-        </tr>
 
+      <% @search_results.each do |result| %>
+        <tr>
+          <% result.each do |value| %>       
+            <td><%= value %></td>              
+          <% end %>
+        </tr>
       <% end %>
 
     <% end %>
@@ -105,6 +100,6 @@
 	  </tbody>
 	</table>
 
-<!-- Load JavaScript -->
-
+<!-- Load custom JavaScript -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="js/search_results.js"></script>
