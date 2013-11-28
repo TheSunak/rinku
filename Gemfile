@@ -14,7 +14,6 @@ group :development do
 	gem 'better_errors'
 	gem 'binding_of_caller'
 	gem 'pry-debugger'
-  gem 'rerun'
   gem 'tux'
   gem 'webrick', '~> 1.3.1' 
 end

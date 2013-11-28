@@ -21,7 +21,7 @@ module Rinku
       set :public_folder, 'public'
     end
 
-    # Include debug capabilities in development.
+    # ==> Include debug capabilities in development.
     configure :development do
       require 'better_errors'
       require 'binding_of_caller'
