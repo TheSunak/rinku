@@ -2,12 +2,9 @@
 require 'bundler'
 Bundler.require
 
+# Include Sinatra libraries.
 require 'sinatra/base'
 require 'sinatra/reloader'
-
-require 'better_errors'
-require 'binding_of_caller'
-require 'pry-debugger'
 
 # Include all models in lib/*/ folders.
 require_relative 'environment'
@@ -24,13 +21,17 @@ module Rinku
       set :public_folder, 'public'
     end
 
+    # Include debug capabilities in development.
     configure :development do
-      # ==> Use Better Errors debugger in development.
+      require 'better_errors'
+      require 'binding_of_caller'
+      require 'pry-debugger'
+
       use BetterErrors::Middleware
       BetterErrors.application_root = File.expand_path('..', __FILE__)
 
-      # ==> Use Sinatra Reloader for real time modifications.
       register Sinatra::Reloader
+      also_reload 'lib/*/*.rb'
     end
 
     # Routes
@@ -59,10 +60,6 @@ module Rinku
       row_results  = Linkedin.collect_data(company_info)
       
       row_results.to_json
-    end
-
-    get '/boom' do
-      raise 'Oops! See you at the better_errors error page!'
     end
 
     # Helpers
