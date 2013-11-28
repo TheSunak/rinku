@@ -9,12 +9,10 @@ gem "rake"
 gem 'linkedin'
 gem 'oauth2'
 
-group :debug do
-	gem "better_errors"
-	gem "debugger"
-end
-
 group :development do
+	gem "better_errors"
+	gem "binding_of_caller"
+	gem "pry-debugger"
   gem "shotgun"
   gem "tux"
   gem 'webrick', '~> 1.3.1' 
